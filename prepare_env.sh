@@ -39,6 +39,21 @@ else
     echo "All required system dependencies are installed."
 fi
 
+# Check for Adobe DNG Converter on macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    DNG_CONVERTER_PATH="/Applications/Adobe DNG Converter.app/Contents/MacOS/Adobe DNG Converter"
+    if [ ! -f "$DNG_CONVERTER_PATH" ]; then
+        echo ""
+        echo "WARNING: Adobe DNG Converter not found at:"
+        echo "  $DNG_CONVERTER_PATH"
+        echo "If you want to use ARW to DNG conversion, please install it manually from:"
+        echo "  https://helpx.adobe.com/photoshop/using/adobe-dng-converter.html"
+        echo ""
+    else
+        echo "Adobe DNG Converter found."
+    fi
+fi
+
 echo "Installing Python dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
